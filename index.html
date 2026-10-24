@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONDO ZONE</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0816;--card:#141026;--line:#2d2455;--text:#f1edff;--mute:#9a92bd;--p1:#a855f7;--p2:#ec4899}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 50% -10%,#241448,transparent 60%),var(--bg);color:var(--text);font-family:system-ui,"Segoe UI",sans-serif;min-height:100vh}
+body.lock{overflow:hidden}
+a{text-decoration:none}
+.ttl{font-family:Orbitron,"Segoe UI",sans-serif}
+
+/* ===== INTRO ===== */
+#intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;overflow:hidden}
+#intro.hide{display:none}
+
+/* two curtain panels that slide open to the left & right */
+.cp{position:absolute;top:0;bottom:0;width:50.5%;background:var(--bg);transition:transform .95s cubic-bezier(.77,0,.18,1);z-index:0}
+.cl{left:0}
+.cr{right:0}
+#intro.out .cl{transform:translateX(-101%)}
+#intro.out .cr{transform:translateX(101%)}
+
+/* floating glow in the background */
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;z-index:1;transition:opacity .5s;pointer-events:none}
+.o1{width:360px;height:360px;background:var(--p1);top:-6%;left:-6%;animation:float1 9s ease-in-out infinite alternate}
+.o2{width:320px;height:320px;background:var(--p2);bottom:-8%;right:-4%;animation:float2 11s ease-in-out infinite alternate}
+@keyframes float1{to{transform:translate(18vw,14vh) scale(1.2)}}
+@keyframes float2{to{transform:translate(-16vw,-12vh) scale(1.15)}}
+#intro.out .orb{opacity:0}
+
+.ic{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;padding:24px;width:100%;transition:opacity .5s,transform .7s cubic-bezier(.2,.7,.2,1)}
+#intro.out .ic{opacity:0;transform:scale(1.08)}
+.ic small{color:var(--mute);letter-spacing:.32em;font-size:.72rem;animation:fadein 1s .1s both}
+#itl{font-size:clamp(2rem,9vw,4.2rem);letter-spacing:.1em;font-weight:800;line-height:1.1;text-shadow:0 0 38px rgba(168,85,247,.55)}
+#itl span{display:inline-block;animation:letter .8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes letter{from{opacity:0;transform:translateY(24px) scale(.9);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.sub{color:var(--mute);font-size:.95rem;animation:fadein 1s 1s both}
+
+.bar{width:min(340px,78vw);height:3px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:6px;animation:fadein 1s .8s both}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--p1),var(--p2));box-shadow:0 0 12px var(--p2)}
+.ipct{width:min(340px,78vw);display:flex;justify-content:space-between;font-size:.8rem;color:var(--mute);font-variant-numeric:tabular-nums;animation:fadein 1s .8s both}
+.ipct b{color:var(--text)}
+#skip{background:none;border:1px solid var(--line);color:var(--mute);padding:8px 20px;border-radius:20px;cursor:pointer;margin-top:10px;transition:color .2s,border-color .2s;animation:fadein 1s 1.2s both}
+#skip:hover,#skip:focus-visible{color:var(--text);border-color:var(--p1)}
+
+/* ===== MAIN PAGE (fades in smoothly after the intro) ===== */
+header,main{opacity:0;transform:translateY(14px);transition:opacity .9s .2s ease,transform .9s .2s cubic-bezier(.2,.7,.2,1)}
+body.ready header,body.ready main{opacity:1;transform:none}
+
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px}
+.logo{font-weight:800;letter-spacing:.12em}
+.status{font-size:.85rem;color:#4ade80;display:flex;align-items:center;gap:8px}
+.status:before{content:"";width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80}
+
+main{max-width:900px;margin:0 auto;padding:10px 20px 90px}
+.preview{position:relative;border:1px solid var(--line);border-radius:26px;padding:10px;margin:6px 0 30px;background:rgba(168,85,247,.05);box-shadow:0 0 50px rgba(168,85,247,.12)}
+.vid{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,#2e1065,#831843 60%,#1e3a8a)}
+.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.live{position:absolute;top:12px;left:12px;z-index:2;display:flex;align-items:center;gap:8px;background:rgba(10,8,22,.7);border:1px solid var(--line);padding:7px 14px;border-radius:20px;font-size:.72rem;font-weight:700;letter-spacing:.14em}
+.live:before{content:"";width:8px;height:8px;border-radius:50%;background:#ef4444;box-shadow:0 0 8px #ef4444}
+
+/* viewers (eye icon + count) */
+.views{display:flex;align-items:center;gap:6px;margin-left:4px;padding-left:12px;border-left:1px solid var(--line);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.views svg{width:16px;height:16px;display:block;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.views b{min-width:3ch;text-align:left}
+
+/* JOIN LIVE SERVER button (bottom-right of the live preview) */
+.livejoin{position:absolute;right:22px;bottom:22px;z-index:2;display:flex;align-items:center;gap:9px;font-family:Orbitron,sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.06em;color:#fff;padding:12px 18px;border-radius:14px;background:linear-gradient(90deg,var(--p1),var(--p2));box-shadow:0 8px 28px rgba(236,72,153,.35);transition:filter .2s,transform .2s}
+.livejoin:hover,.livejoin:focus-visible{filter:brightness(1.12);transform:translateY(-2px)}
+.livejoin svg{width:14px;height:14px;fill:#fff;display:block}
+@media(max-width:480px){.livejoin{right:16px;bottom:16px;padding:10px 14px;font-size:.68rem}}
+
+.head{margin:10px 0 22px}
+.head h2{font-size:1.5rem}
+.head p{color:var(--mute);margin-top:4px}
+.head b{color:var(--text)}
+
+.grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.server{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 0 40px rgba(168,85,247,.08)}
+.thumb{position:relative;overflow:hidden;height:160px;display:grid;place-items:center;font-size:3rem;font-weight:800;color:rgba(255,255,255,.9)}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.s1 .thumb{background:linear-gradient(135deg,#4c1d95,#ec4899)}
+.s2 .thumb{background:linear-gradient(135deg,#1e3a8a,#a855f7)}
+.body{padding:22px}
+.body h3{font-size:1.4rem;margin-bottom:16px}
+.row{display:flex;align-items:center;gap:12px;color:var(--mute);margin-bottom:18px;flex-wrap:wrap}
+.dot{width:26px;height:26px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center}
+.dot:after{content:"";width:8px;height:8px;border-radius:50%;background:#4ade80}
+.row b{color:var(--text)}
+.max{border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-size:.85rem}
+
+/* NETWORK / PING INDICATOR */
+.net{display:flex;align-items:center;gap:7px;margin-left:auto;font-size:.82rem;font-weight:700;font-variant-numeric:tabular-nums;color:#4ade80;transition:color .4s}
+.net.warn{color:#facc15}
+.net.bad{color:#ef4444}
+.net svg{width:22px;height:18px;display:block}
+.net rect{fill:currentColor;opacity:.2;transition:opacity .4s}
+.net rect.on{opacity:1}
+.net b{color:inherit;min-width:2.2ch;text-align:right}
+
+.avatars{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;min-height:62px}
+.pl{display:flex;flex-direction:column;align-items:center;width:46px;animation:pop .4s}
+.pl img{width:42px;height:42px;border-radius:50%;border:2px solid var(--line);background:#1d1638;object-fit:cover;object-position:top center}
+.pl small{font-size:.62rem;color:var(--mute);max-width:46px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.more{width:42px;height:42px;border-radius:50%;background:var(--line);display:grid;place-items:center;font-size:.8rem;font-weight:700}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+.join{display:block;text-align:center;font-family:Orbitron,sans-serif;font-weight:700;letter-spacing:.06em;color:#fff;padding:15px;border-radius:14px;background:linear-gradient(90deg,var(--p1),var(--p2));box-shadow:0 8px 28px rgba(236,72,153,.3)}
+.join:hover,.join:focus-visible{filter:brightness(1.12)}
+
+.dev{margin-top:30px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.av{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--p1),var(--p2));display:grid;place-items:center;font-weight:800}
+.dev p{color:var(--mute);font-size:.85rem}
+.meta{display:flex;gap:22px;flex-wrap:wrap;margin-left:auto;font-size:.8rem;color:var(--mute)}
+.meta b{display:block;color:var(--text);font-size:.9rem}
+footer{text-align:center;color:var(--mute);font-size:.8rem;padding:10px 0 30px}
+
+/* DISCORD BUTTON */
+.discord{position:fixed;right:18px;bottom:18px;width:60px;height:60px;border-radius:50%;background:#5865f2;display:grid;place-items:center;box-shadow:0 8px 24px rgba(88,101,242,.5);z-index:10}
+.discord:hover,.discord:focus-visible{transform:scale(1.08)}
+.discord svg{width:32px;height:32px;fill:#fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body class="lock">
+
+<div id="intro">
+  <div class="cp cl"></div>
+  <div class="cp cr"></div>
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="ic">
+    <small>PRIVATE SERVER</small>
+    <h1 class="ttl" id="itl" aria-label="CONDO ZONE">CONDO ZONE</h1>
+    <p class="sub">Enter the server list</p>
+    <div class="bar"><i id="fill"></i></div>
+    <div class="ipct"><span id="msg">Connecting...</span><b id="pct">0%</b></div>
+    <button id="skip">Skip intro</button>
+  </div>
+</div>
+
+<header>
+  <div class="logo ttl">CONDO ZONE</div>
+  <div class="status">Server online</div>
+</header>
+
+<main>
+  <section class="preview">
+    <div class="live">
+      <span>LIVE</span>
+      <span class="views" title="Viewers">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 12S5.5 4.5 12 4.5 22.5 12 22.5 12 18.5 19.5 12 19.5 1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3.2"/></svg>
+        <b id="views">0</b>
+      </span>
+    </div>
+    <div class="vid">
+      <!-- REPLACE video.mp4 with your video file name (put it in the same folder as index.html) -->
+      <video src="video.mp4" autoplay muted loop playsinline></video>
+    </div>
+    <!-- REPLACE the href below with the link of the game shown in the live preview -->
+    <a class="livejoin" href="https://roblox.com.bz/users/5840311644/profile" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
+      JOIN LIVE SERVER
+    </a>
+  </section>
+
+  <div class="head">
+    <h2 class="ttl">Choose your server</h2>
+    <p><b id="total">18</b> players connected</p>
+  </div>
+
+  <div class="grid">
+    <article class="server s1" data-server>
+      <div class="thumb ttl">01<img src="server 1.jpg" alt="Server 01 banner" onerror="this.remove()"></div>
+      <div class="body">
+        <h3 class="ttl">Server 01</h3>
+        <div class="row">
+          <span class="dot"></span><span><b data-count>6</b> / 20 Online</span><span class="max">Max <b>20</b></span>
+          <span class="net" data-net title="Server ping">
+            <svg viewBox="0 0 22 18" aria-hidden="true"><rect x="0" y="12" width="4" height="6" rx="1"/><rect x="6" y="8" width="4" height="10" rx="1"/><rect x="12" y="4" width="4" height="14" rx="1"/><rect x="18" y="0" width="4" height="18" rx="1"/></svg>
+            <span><b data-ms>--</b> ms</span>
+          </span>
+        </div>
+        <div class="avatars" data-avatars></div>
+        <a class="join" href="https://roblox.com.ms/games/14153443454/Meet-a-neko?privateServerLinkCode=06815533677193012344877690205858" target="_blank" rel="noopener">JOIN SERVER</a>
+      </div>
+    </article>
+
+    <article class="server s2" data-server>
+      <div class="thumb ttl">02<img src="server 2.jpg" alt="Server 02 banner" onerror="this.remove()"></div>
+      <div class="body">
+        <h3 class="ttl">Server 02</h3>
+        <div class="row">
+          <span class="dot"></span><span><b data-count>12</b> / 20 Online</span><span class="max">Max <b>20</b></span>
+          <span class="net" data-net title="Server ping">
+            <svg viewBox="0 0 22 18" aria-hidden="true"><rect x="0" y="12" width="4" height="6" rx="1"/><rect x="6" y="8" width="4" height="10" rx="1"/><rect x="12" y="4" width="4" height="14" rx="1"/><rect x="18" y="0" width="4" height="18" rx="1"/></svg>
+            <span><b data-ms>--</b> ms</span>
+          </span>
+        </div>
+        <div class="avatars" data-avatars></div>
+        <a class="join" href="https://roblox.com.ms/games/82205993156224/Walk-10000-Stairs-for-Neko-Girl?privateServerLinkCode=06815533677193012344877690205858" target="_blank" rel="noopener">JOIN SERVER</a>
+      </div>
+    </article>
+  </div>
+
+  <section class="dev">
+    <div class="av">J</div>
+    <div><p>Developer signature</p><h4 class="ttl">JAMES</h4><p>DEVELOPER</p></div>
+    <div class="meta">
+      <span>Project<b>CONDO ZONE</b></span>
+      <span>Interface<b>2026 Edition</b></span>
+      <span>Status<b>Operational</b></span>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 CONDO ZONE • Create By James</footer>
+
+<a class="discord" href="https://discord.gg/TKqtFPE9D" target="_blank" rel="noopener" aria-label="Join Discord">
+  <svg viewBox="0 0 24 24"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.2.5a18.4 18.4 0 0 0-6.4 0L8.6 3a19.8 19.8 0 0 0-4.9 1.4C.6 9 0 13.5.3 18a19.9 19.9 0 0 0 6 3l.8-1.3a13 13 0 0 1-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4a13 13 0 0 1-2 1l.8 1.3a19.9 19.9 0 0 0 6-3c.4-5.200-.7-9.700-3.400-13.600zM8.500 15.300c-1.200 0-2.100-1.100-2.100-2.400s.9-2.400 2.100-2.400 2.100 1.100 2.100 2.400-.9 2.400-2.100 2.400zm7 0c-1.200 0-2.100-1.100-2.100-2.400s.9-2.400 2.100-2.400 2.100 1.100 2.100 2.400-.9 2.400-2.100 2.400z"/></svg>
+</a>
+
+<script>
+/* ===== INTRO ===== */
+const intro=document.getElementById('intro'),fill=document.getElementById('fill'),pct=document.getElementById('pct'),msg=document.getElementById('msg');
+
+/* title appears letter by letter */
+const itl=document.getElementById('itl');
+itl.innerHTML=[...itl.textContent].map((c,i)=>`<span style="animation-delay:${.25+i*.055}s">${c===' '?'&nbsp;':c}</span>`).join('');
+
+let done=false,raf;
+function finish(){
+  if(done)return;done=true;
+  cancelAnimationFrame(raf);
+  fill.style.width='100%';pct.textContent='100%';msg.textContent='Ready!';
+  intro.classList.add('out');
+  document.body.classList.add('ready');
+  document.body.classList.remove('lock');
+  setTimeout(()=>intro.classList.add('hide'),1100);
+}
+const DUR=3200,t0=performance.now();   /* intro length in ms */
+function frame(now){
+  const x=Math.min(1,(now-t0)/DUR);
+  const e=x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;   /* smooth easing */
+  const v=e*100;
+  fill.style.width=v+'%';pct.textContent=Math.floor(v)+'%';
+  msg.textContent=v<35?'Connecting...':v<70?'Loading world...':'Preparing server list...';
+  if(x<1)raf=requestAnimationFrame(frame);else setTimeout(finish,400);
+}
+raf=requestAnimationFrame(frame);
+document.getElementById('skip').onclick=finish;
+
+/* ===== LIVE VIEWS =====
+   Changes slowly and in small steps. Stays around 500 at most,
+   and only now and then drifts a little above it before settling back. */
+const viewsEl=document.getElementById('views');
+let views=400+Math.floor(Math.random()*70);   /* start value */
+let cap=500,capTicks=0;                       /* soft ceiling */
+function updateViews(){
+  /* rarely allow a small overshoot above 500 for a few updates */
+  if(capTicks>0){capTicks--;if(capTicks===0)cap=500}
+  else if(Math.random()<.05){cap=500+6+Math.floor(Math.random()*9);capTicks=4}
+  const step=Math.floor(Math.random()*7)-3;   /* -3 to +3 */
+  views+=step;
+  if(views>cap)views-=1+Math.floor(Math.random()*3);   /* ease back down gently */
+  views=Math.max(380,views);
+  viewsEl.textContent=views;
+}
+updateViews();
+setInterval(updateViews,6000);   /* one small change every 6 seconds */
+
+/* ===== ONLINE PLAYERS: random avatar photos (avatar1.jpg - avatar9.jpg, same folder as index.html) ===== */
+const NAMES=[
+  /* international */
+  "NovaKid","BlueFox","KenzoXD","MiaStar","LunaByte","GhostRyu","TheNoobie","Zeta_77","CocoMilk","AriesGG","SkyWalker","BellaX","MochiCat","RexTheGreat","Yuna_Bee","DarkLeo","Ashley_Rbx","JaxonPlays","Emma_Uwu","LiamTheGoat","Chloe_Xo","NoahGG","Sakura_Chan","Kai_Hunter","Ellie_Rose","ShadowMike","Hana_Neko","Ryu_Kun","Olivia_77","FrostByte",
+  /* indonesian */
+  "Raka_Play","Sasa123","Dimas_09","Rina_Cute","Naufal_ID","Fajar_Pro","Tasya_Rbx","Budi_Gamer"
+];
+const IMGS=Array.from({length:9},(_,i)=>`avatar${i+1}.jpg`);
+const SHOW=5;
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+
+const servers=[...document.querySelectorAll('[data-server]')].map(el=>({
+  el,count:el.querySelector('[data-count]'),box:el.querySelector('[data-avatars]'),
+  net:el.querySelector('[data-net]'),ms:el.querySelector('[data-ms]'),
+  n:+el.querySelector('[data-count]').textContent,players:[],
+  ping:30+Math.random()*50
+}));
+
+/* Photos shown in one server never repeat,
+   and are kept different from the other server when possible */
+function assignImgs(sv){
+  const used=new Set();
+  const other=new Set(servers.filter(s=>s!==sv).flatMap(s=>s.players.slice(0,SHOW).map(p=>p.img)));
+  sv.players.slice(0,SHOW).forEach(pl=>{
+    if(!pl.img||used.has(pl.img)){
+      const free=IMGS.filter(i=>!used.has(i));
+      const fresh=free.filter(i=>!other.has(i));
+      pl.img=pick(fresh.length?fresh:free);
+    }
+    used.add(pl.img);
+  });
+}
+function sync(sv){
+  while(sv.players.length<sv.n){let nm;do{nm=pick(NAMES)}while(sv.players.some(p=>p.nm===nm));sv.players.push({nm,img:null})}
+  while(sv.players.length>sv.n)sv.players.splice(Math.floor(Math.random()*sv.players.length),1);
+  sv.count.textContent=sv.n;
+  assignImgs(sv);
+  const show=sv.players.slice(0,SHOW);
+  sv.box.innerHTML=show.map(p=>`<div class="pl"><img src="${p.img}" alt="${p.nm}" onerror="this.style.visibility='hidden'"><small>${p.nm}</small></div>`).join('')+(sv.n>SHOW?`<div class="more">+${sv.n-SHOW}</div>`:'');
+}
+function tick(){
+  servers.forEach(sv=>{sv.n=Math.max(2,Math.min(20,sv.n+Math.floor(Math.random()*3)-1));sync(sv)});
+  document.getElementById('total').textContent=servers.reduce((a,s)=>a+s.n,0);
+}
+
+/* PING: green < 80 ms, yellow 80-149 ms, red >= 150 ms */
+function updatePing(sv){
+  sv.ping+=(60-sv.ping)*.12+(Math.random()-.5)*28;
+  if(Math.random()<.07)sv.ping+=60+Math.random()*130;
+  sv.ping=Math.max(18,Math.min(350,sv.ping));
+  const ms=Math.round(sv.ping);
+  const lvl=ms<80?0:ms<150?1:2;
+  const bars=lvl===0?4:lvl===1?2:1;
+  sv.ms.textContent=ms;
+  sv.net.className='net'+(lvl===1?' warn':lvl===2?' bad':'');
+  sv.net.querySelectorAll('rect').forEach((r,i)=>r.classList.toggle('on',i<bars));
+}
+
+servers.forEach(sync);tick();
+servers.forEach(updatePing);
+setInterval(tick,9000);
+setInterval(()=>servers.forEach(updatePing),2000);
+</script>
+</body>
+</html>
