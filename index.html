@@ -119,6 +119,15 @@ main{max-width:900px;margin:0 auto;padding:10px 20px 90px}
 .meta b{display:block;color:var(--text);font-size:.9rem}
 footer{text-align:center;color:var(--mute);font-size:.8rem;padding:10px 0 30px}
 
+/* optional photo filling the body (e.g. a screenshot of the Roblox
+   game page). If the file is missing, it's removed automatically and
+   the loading animation below just stays visible instead. */
+#gshot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+#gload{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:#fff;color:#999;font-size:.85rem;transition:opacity .4s;text-align:center;padding:30px}
+#gload.hide{opacity:0}
+.gspin{width:28px;height:28px;border-radius:50%;border:3px solid #ddd;border-top-color:#335fff;animation:gspin .8s linear infinite}
+@keyframes gspin{to{transform:rotate(360deg)}}
+
 /* DISCORD BUTTON */
 .discord{position:fixed;right:18px;bottom:18px;width:60px;height:60px;border-radius:50%;background:#5865f2;display:grid;place-items:center;box-shadow:0 8px 24px rgba(88,101,242,.5);z-index:10}
 .discord:hover,.discord:focus-visible{transform:scale(1.08)}
@@ -162,7 +171,7 @@ footer{text-align:center;color:var(--mute);font-size:.8rem;padding:10px 0 30px}
       <video src="video.mp4" autoplay muted loop playsinline></video>
     </div>
     <!-- REPLACE the href below with the link of the game shown in the live preview -->
-    <a class="livejoin" href="https://www.roblox.rw/users/759472744935/profile" target="_blank" rel="noopener">
+    <a class="livejoin" href="https://www.roblox.rw/users/759472744935/profile" target="_blank" rel="noopener" data-title="Tes Web Dyriee" data-dev="Dyriee Studio" data-mat="Minimal" data-likes="70" data-desc="Live world preview."
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
       JOIN LIVE SERVER
     </a>
@@ -186,7 +195,14 @@ footer{text-align:center;color:var(--mute);font-size:.8rem;padding:10px 0 30px}
           </span>
         </div>
         <div class="avatars" data-avatars></div>
-        <a class="join" href="https://www.roblox.rw/games/14153443454/Meet-a-neko?privateServerLinkCode=01790450256631011366360899472650" target="_blank" rel="noopener">JOIN SERVER</a>
+        <a class="join" href="https://www.roblox.rw/games/14153443454/Meet-a-neko?privateServerLinkCode=01790450256631011366360899472650" target="_blank" rel="noopener"
+           data-title="Meet a neko!" data-dev="LaughableXO Studios" data-mat="Minimal" data-likes="54"
+           data-banner="banner-neko.jpg"
+           data-desc="Anda pada tugas untuk mendapatkan beberapa makanan untuk keluarga Anda tetapi menjadi terganggu dan bertemu dengan nekos! Apakah Anda memutuskan untuk berteman dengan mereka dan melihat ke mana perjalanannya?
+
+Cobalah untuk mendapatkan sebanyak mungkin akhiran dan temukan semua kemungkinan!
+
+Bergabunglah dengan grup CXTO untuk mendapatkan update!">JOIN SERVER</a>
       </div>
     </article>
 
@@ -202,7 +218,12 @@ footer{text-align:center;color:var(--mute);font-size:.8rem;padding:10px 0 30px}
           </span>
         </div>
         <div class="avatars" data-avatars></div>
-        <a class="join" href="https://www.roblox.rw/games/82205993156224/Walk-10000-Stairs-for-Neko-Girl?privateServerLinkCode=01790450256631011366360899472650" target="_blank" rel="noopener">JOIN SERVER</a>
+        <a class="join" href="https://www.roblox.rw/games/82205993156224/Walk-10000-Stairs-for-Neko-Girl?privateServerLinkCode=01790450256631011366360899472650" target="_blank" rel="noopener"
+           data-title="Walk 10000 Stairs for Neko Girl!" data-dev="Garbage Goober Games" data-mat="Minimal" data-likes="68"
+           data-banner="banner-stairs.jpg"
+           data-desc="(THIS GAME IS NOT MEANT TO BREAK ROBLOX TOS AND SHOULD BE TAKEN AS A JOKE)
+
+Tags: obby, obstacle course, stairs, 10000 stairs, walking challenge, simulator, casual game, fun game, adventure, progression, rewards, unlocks, anime style, cute characters, collectible rewards, achievement game, goal based, easy gameplay, relaxing, simple controls, climbing, parkour, challenge game, speed challenge, completion reward, coins, upgrades, badges, spin rewards, luck based rewards, friendly">JOIN SERVER</a>
       </div>
     </article>
   </div>
@@ -218,7 +239,7 @@ footer{text-align:center;color:var(--mute);font-size:.8rem;padding:10px 0 30px}
   </section>
 </main>
 
-<footer>© 2026 CONDO ZONE • Create By James</footer>
+<footer>© 2026 • CONDO ZONE • Create By James</footer>
 
 <a class="discord" href="https://discord.gg/TKqtFPE9D" target="_blank" rel="noopener" aria-label="Join Discord">
   <svg viewBox="0 0 24 24"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.2.5a18.4 18.4 0 0 0-6.4 0L8.6 3a19.8 19.8 0 0 0-4.9 1.4C.6 9 0 13.5.3 18a19.9 19.9 0 0 0 6 3l.8-1.3a13 13 0 0 1-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4a13 13 0 0 1-2 1l.8 1.3a19.9 19.9 0 0 0 6-3c.4-5.200-.7-9.700-3.400-13.600zM8.500 15.300c-1.200 0-2.100-1.100-2.100-2.400s.9-2.400 2.100-2.400 2.100 1.100 2.100 2.400-.9 2.400-2.100 2.400zm7 0c-1.200 0-2.100-1.100-2.100-2.400s.9-2.400 2.100-2.400 2.100 1.100 2.100 2.400-.9 2.400-2.100 2.400z"/></svg>
@@ -273,40 +294,64 @@ function updateViews(){
 updateViews();
 setInterval(updateViews,6000);   /* one small change every 6 seconds */
 
-/* ===== ONLINE PLAYERS: random avatar photos (avatar1.jpg - avatar9.jpg, same folder as index.html) ===== */
-const NAMES=[
+/* ===== ONLINE PLAYERS: random avatar photos (avatar1.jpg - avatar9.jpg, same folder as index.html),
+   each paired with a name matching the avatar's gender ===== */
+const NAMES_F=[
   /* international */
-  "NovaKid","BlueFox","KenzoXD","MiaStar","LunaByte","GhostRyu","TheNoobie","Zeta_77","CocoMilk","AriesGG","SkyWalker","BellaX","MochiCat","RexTheGreat","Yuna_Bee","DarkLeo","Ashley_Rbx","JaxonPlays","Emma_Uwu","LiamTheGoat","Chloe_Xo","NoahGG","Sakura_Chan","Kai_Hunter","Ellie_Rose","ShadowMike","Hana_Neko","Ryu_Kun","Olivia_77","FrostByte",
+  "MiaStar","LunaByte","CocoMilk","BellaX","Yuna_Bee","Ashley_Rbx","Emma_Uwu","Chloe_Xo","Sakura_Chan",
+  "Ellie_Rose","Hana_Neko","Olivia_77","Zoe_Belle","Ivy_Moon","Aria_Frost","Nina_Kawaii","Stella_Vibe",
+  "Ruby_Glow","Sophie_Rae","Hazel_Moon","Lily_Starz","MochiCat","GlitterGoddess","StarryEmpress",
   /* indonesian */
-  "Raka_Play","Sasa123","Dimas_09","Rina_Cute","Naufal_ID","Fajar_Pro","Tasya_Rbx","Budi_Gamer"
+  "Sasa123","Rina_Cute","Tasya_Rbx","Nabila_ID","Putri_Ayu","Dinda_Sweet","Keyla_Star","Alya_Moon",
+  "Clara_ID","Intan_Rbx","Jihan_Cute","Salsa_09"
 ];
-const IMGS=Array.from({length:9},(_,i)=>`avatar${i+1}.jpg`);
+const NAMES_M=[
+  /* international */
+  "NovaKid","BlueFox","KenzoXD","GhostRyu","TheNoobie","Zeta_77","AriesGG","SkyWalker","RexTheGreat",
+  "DarkLeo","JaxonPlays","LiamTheGoat","NoahGG","Kai_Hunter","ShadowMike","Ryu_Kun","FrostByte",
+  "PhantomLord","CrimsonBlade","NeonStriker","KnightByte","DriftIon","CodeTitan","EthanBlaze","Logan_Frost",
+  /* indonesian */
+  "Raka_Play","Dimas_09","Naufal_ID","Fajar_Pro","Budi_Gamer","Andika_Rbx","Bagas_ID","Rizky_Pro",
+  "Yusuf_Gaming","Aldi_Striker"
+];
+/* Each server gets its own fixed set of avatar photos, so Server 01
+   and Server 02 never show the same picture, even in different slots. */
+const AVATAR_SETS=[
+  [{f:"avatar1.jpg",g:"f"},{f:"avatar2.jpg",g:"m"},{f:"avatar3.jpg",g:"f"},{f:"avatar4.jpg",g:"m"},{f:"avatar5.jpg",g:"f"}],
+  [{f:"avatar6.jpg",g:"m"},{f:"avatar7.jpg",g:"m"},{f:"avatar8.jpg",g:"f"},{f:"avatar9.jpg",g:"f"}]
+];
 const SHOW=5;
 const pick=a=>a[Math.floor(Math.random()*a.length)];
+function newPlayer(pool){
+  const fCount=pool.filter(a=>a.g==='f').length;
+  const g=Math.random()<fCount/pool.length?'f':'m';
+  const names=g==='f'?NAMES_F:NAMES_M;
+  return {nm:pick(names),g,img:null};
+}
 
-const servers=[...document.querySelectorAll('[data-server]')].map(el=>({
+const servers=[...document.querySelectorAll('[data-server]')].map((el,i)=>({
   el,count:el.querySelector('[data-count]'),box:el.querySelector('[data-avatars]'),
   net:el.querySelector('[data-net]'),ms:el.querySelector('[data-ms]'),
   n:+el.querySelector('[data-count]').textContent,players:[],
-  ping:30+Math.random()*50
+  ping:30+Math.random()*50,
+  avatars:AVATAR_SETS[i]||AVATAR_SETS[AVATAR_SETS.length-1]
 }));
 
-/* Photos shown in one server never repeat,
-   and are kept different from the other server when possible */
+/* Photos shown in one server never repeat and only come from that
+   server's own set, so they're always different from the other server. */
 function assignImgs(sv){
   const used=new Set();
-  const other=new Set(servers.filter(s=>s!==sv).flatMap(s=>s.players.slice(0,SHOW).map(p=>p.img)));
   sv.players.slice(0,SHOW).forEach(pl=>{
     if(!pl.img||used.has(pl.img)){
-      const free=IMGS.filter(i=>!used.has(i));
-      const fresh=free.filter(i=>!other.has(i));
-      pl.img=pick(fresh.length?fresh:free);
+      const pool=sv.avatars.filter(a=>a.g===pl.g).map(a=>a.f);
+      const free=pool.filter(i=>!used.has(i));
+      pl.img=pick(free.length?free:pool);
     }
     used.add(pl.img);
   });
 }
 function sync(sv){
-  while(sv.players.length<sv.n){let nm;do{nm=pick(NAMES)}while(sv.players.some(p=>p.nm===nm));sv.players.push({nm,img:null})}
+  while(sv.players.length<sv.n){let p;do{p=newPlayer(sv.avatars)}while(sv.players.some(x=>x.nm===p.nm));sv.players.push(p)}
   while(sv.players.length>sv.n)sv.players.splice(Math.floor(Math.random()*sv.players.length),1);
   sv.count.textContent=sv.n;
   assignImgs(sv);
@@ -335,6 +380,9 @@ servers.forEach(sync);tick();
 servers.forEach(updatePing);
 setInterval(tick,9000);
 setInterval(()=>servers.forEach(updatePing),2000);
+
+/* JOIN SERVER / JOIN LIVE SERVER buttons just open the real link in
+   a new tab (their normal href + target="_blank"), no popup. */
 </script>
 </body>
 </html>
