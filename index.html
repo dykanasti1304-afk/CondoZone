@@ -17,14 +17,12 @@ a{text-decoration:none}
 #intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;overflow:hidden}
 #intro.hide{display:none}
 
-/* two curtain panels that slide open to the left & right */
 .cp{position:absolute;top:0;bottom:0;width:50.5%;background:var(--bg);transition:transform .95s cubic-bezier(.77,0,.18,1);z-index:0}
 .cl{left:0}
 .cr{right:0}
 #intro.out .cl{transform:translateX(-101%)}
 #intro.out .cr{transform:translateX(101%)}
 
-/* floating glow in the background */
 .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;z-index:1;transition:opacity .5s;pointer-events:none}
 .o1{width:360px;height:360px;background:var(--p1);top:-6%;left:-6%;animation:float1 9s ease-in-out infinite alternate}
 .o2{width:320px;height:320px;background:var(--p2);bottom:-8%;right:-4%;animation:float2 11s ease-in-out infinite alternate}
@@ -48,7 +46,7 @@ a{text-decoration:none}
 #skip{background:none;border:1px solid var(--line);color:var(--mute);padding:8px 20px;border-radius:20px;cursor:pointer;margin-top:10px;transition:color .2s,border-color .2s;animation:fadein 1s 1.2s both}
 #skip:hover,#skip:focus-visible{color:var(--text);border-color:var(--p1)}
 
-/* ===== MAIN PAGE (fades in smoothly after the intro) ===== */
+/* ===== MAIN PAGE ===== */
 header,main{opacity:0;transform:translateY(14px);transition:opacity .9s .2s ease,transform .9s .2s cubic-bezier(.2,.7,.2,1)}
 body.ready header,body.ready main{opacity:1;transform:none}
 
@@ -64,13 +62,11 @@ main{max-width:900px;margin:0 auto;padding:10px 20px 90px}
 .live{position:absolute;top:12px;left:12px;z-index:2;display:flex;align-items:center;gap:8px;background:rgba(10,8,22,.7);border:1px solid var(--line);padding:7px 14px;border-radius:20px;font-size:.72rem;font-weight:700;letter-spacing:.14em}
 .live:before{content:"";width:8px;height:8px;border-radius:50%;background:#ef4444;box-shadow:0 0 8px #ef4444}
 
-/* viewers (eye icon + count) */
 .views{display:flex;align-items:center;gap:6px;margin-left:4px;padding-left:12px;border-left:1px solid var(--line);letter-spacing:.04em;font-variant-numeric:tabular-nums}
 .views svg{width:16px;height:16px;display:block;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .views b{min-width:3ch;text-align:left}
 
-/* JOIN LIVE SERVER button (bottom-right of the live preview) */
-.livejoin{position:absolute;right:22px;bottom:22px;z-index:2;display:flex;align-items:center;gap:9px;font-family:Orbitron,sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.06em;color:#fff;padding:12px 18px;border-radius:14px;background:linear-gradient(90deg,var(--p1),var(--p2));box-shadow:0 8px 28px rgba(236,72,153,.35);transition:filter .2s,transform .2s}
+.livejoin{position:absolute;right:22px;bottom:22px;z-index:2;display:flex;align-items:center;gap:9px;font-family:Orbitron,sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.06em;color:#fff;padding:12px 18px;border-radius:14px;background:linear-gradient(90deg,var(--p1),var(--p2));box-shadow:0 8px 28px rgba(236,72,153,.35);transition:filter .2s,transform .2s;cursor:pointer;}
 .livejoin:hover,.livejoin:focus-visible{filter:brightness(1.12);transform:translateY(-2px)}
 .livejoin svg{width:14px;height:14px;fill:#fff;display:block}
 @media(max-width:480px){.livejoin{right:16px;bottom:16px;padding:10px 14px;font-size:.68rem}}
@@ -94,7 +90,6 @@ main{max-width:900px;margin:0 auto;padding:10px 20px 90px}
 .row b{color:var(--text)}
 .max{border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-size:.85rem}
 
-/* NETWORK / PING INDICATOR */
 .net{display:flex;align-items:center;gap:7px;margin-left:auto;font-size:.82rem;font-weight:700;font-variant-numeric:tabular-nums;color:#4ade80;transition:color .4s}
 .net.warn{color:#facc15}
 .net.bad{color:#ef4444}
@@ -109,7 +104,7 @@ main{max-width:900px;margin:0 auto;padding:10px 20px 90px}
 .pl small{font-size:.62rem;color:var(--mute);max-width:46px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .more{width:42px;height:42px;border-radius:50%;background:var(--line);display:grid;place-items:center;font-size:.8rem;font-weight:700}
 @keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
-.join{display:block;text-align:center;font-family:Orbitron,sans-serif;font-weight:700;letter-spacing:.06em;color:#fff;padding:15px;border-radius:14px;background:linear-gradient(90deg,var(--p1),var(--p2));box-shadow:0 8px 28px rgba(236,72,153,.3)}
+.join{display:block;text-align:center;font-family:Orbitron,sans-serif;font-weight:700;letter-spacing:.06em;color:#fff;padding:15px;border-radius:14px;background:linear-gradient(90deg,var(--p1),var(--p2));box-shadow:0 8px 28px rgba(236,72,153,.3);cursor:pointer;}
 .join:hover,.join:focus-visible{filter:brightness(1.12)}
 
 .dev{margin-top:30px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
@@ -119,19 +114,135 @@ main{max-width:900px;margin:0 auto;padding:10px 20px 90px}
 .meta b{display:block;color:var(--text);font-size:.9rem}
 footer{text-align:center;color:var(--mute);font-size:.8rem;padding:10px 0 30px}
 
-/* optional photo filling the body (e.g. a screenshot of the Roblox
-   game page). If the file is missing, it's removed automatically and
-   the loading animation below just stays visible instead. */
-#gshot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-#gload{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:#fff;color:#999;font-size:.85rem;transition:opacity .4s;text-align:center;padding:30px}
-#gload.hide{opacity:0}
-.gspin{width:28px;height:28px;border-radius:50%;border:3px solid #ddd;border-top-color:#335fff;animation:gspin .8s linear infinite}
-@keyframes gspin{to{transform:rotate(360deg)}}
-
 /* DISCORD BUTTON */
 .discord{position:fixed;right:18px;bottom:18px;width:60px;height:60px;border-radius:50%;background:#5865f2;display:grid;place-items:center;box-shadow:0 8px 24px rgba(88,101,242,.5);z-index:10}
 .discord:hover,.discord:focus-visible{transform:scale(1.08)}
 .discord svg{width:32px;height:32px;fill:#fff}
+
+/* ===== CHROME MODAL OVERLAY (DESAIN DARI SCREENSHOT) ===== */
+.browser-modal-overlay {
+    position: fixed; inset: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 99999; display: none;
+    align-items: center; justify-content: center;
+    padding: 20px;
+}
+.browser-modal-overlay.active {
+    display: flex; animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+}
+.chrome-window {
+    width: 100%; max-width: 1100px; height: 85vh;
+    background: #ffffff; border-radius: 10px;
+    overflow: hidden; display: flex; flex-direction: column;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+.chrome-titlebar {
+    background: #dee1e6; height: 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 0 0 8px; flex-shrink: 0;
+}
+.chrome-tabs { display: flex; height: 34px; margin-top: 6px; gap: 0; }
+.chrome-tab {
+    background: #ffffff; border-radius: 8px 8px 0 0;
+    padding: 0 10px 0 12px; min-width: 140px; max-width: 220px;
+    display: flex; align-items: center; position: relative;
+    box-shadow: 0 -1px 2px rgba(0,0,0,0.05);
+}
+.chrome-tab-icon {
+    width: 16px; height: 16px; margin-right: 8px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.chrome-tab-icon svg { width: 16px; height: 16px; }
+.chrome-tab-title {
+    font-size: 12px; color: #333; flex-grow: 1;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    padding-right: 8px; font-weight: 500;
+}
+.chrome-tab-close {
+    font-size: 14px; color: #5f6368; cursor: pointer;
+    border-radius: 50%; width: 20px; height: 20px;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1; margin-left: 4px;
+}
+.chrome-tab-close:hover { background: #e8eaed; }
+.chrome-window-controls {
+    display: flex; height: 40px;
+    align-items: center; padding-right: 8px;
+}
+.chrome-window-controls span {
+    width: 44px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: #333; cursor: pointer;
+}
+.chrome-window-controls span:hover { background: rgba(0,0,0,0.08); }
+.chrome-window-controls .chrome-close-btn:hover {
+    background: #e81123; color: white;
+}
+
+/* Chrome Address Bar (Screenshot exact design) */
+.chrome-toolbar {
+    background: #ffffff; height: 42px;
+    display: flex; align-items: center;
+    padding: 0 12px; border-bottom: 1px solid #dadce0;
+    flex-shrink: 0;
+}
+.chrome-address-bar {
+    flex-grow: 1; background: #f1f3f4;
+    height: 32px; border-radius: 16px;
+    display: flex; align-items: center;
+    padding: 0 14px; gap: 8px;
+    transition: background 0.2s;
+}
+.chrome-address-bar:hover { background: #e8eaed; }
+.chrome-lock { width: 13px; height: 13px; fill: #5f6368; flex-shrink: 0; }
+.chrome-url {
+    font-size: 13px; color: #202124; flex-grow: 1;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+}
+.chrome-url-dim { color: #5f6368; }
+
+.browser-content {
+    position: relative; flex-grow: 1; background: #fff;
+    display: flex; flex-direction: column; min-height: 0;
+}
+.browser-content iframe {
+    flex-grow: 1; width: 100%; height: 100%;
+    border: none; display: block;
+}
+.bc-load {
+    position: absolute; inset: 0; z-index: 2;
+    background: #fff; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 12px;
+    color: #888; font-size: .85rem; transition: opacity .3s;
+}
+.bc-load.hide { opacity: 0; pointer-events: none; }
+.bc-spin {
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 3px solid #e2e2e2; border-top-color: #2f6feb;
+    animation: bc-spin .8s linear infinite;
+}
+@keyframes bc-spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 768px) {
+    .browser-modal-overlay { padding: 0; }
+    .chrome-window {
+        width: 100%; height: 100vh;
+        height: 100dvh; max-height: 100vh; border-radius: 0;
+    }
+    .chrome-titlebar { padding-left: 4px; }
+    .chrome-tabs { min-width: auto; max-width: none; flex-grow: 1; }
+    .chrome-tab { min-width: 0; max-width: none; padding: 0 8px; }
+    .chrome-tab-title { font-size: 11px; padding-right: 4px; }
+    .chrome-window-controls span { width: 35px; }
+    .chrome-address-bar { padding: 0 10px; }
+    .chrome-url { font-size: 12px; }
+}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -167,11 +278,9 @@ footer{text-align:center;color:var(--mute);font-size:.8rem;padding:10px 0 30px}
       </span>
     </div>
     <div class="vid">
-      <!-- REPLACE video.mp4 with your video file name (put it in the same folder as index.html) -->
       <video src="video.mp4" autoplay muted loop playsinline></video>
     </div>
-    <!-- REPLACE the href below with the link of the game shown in the live preview -->
-    <a class="livejoin" href="https://www.roblox.com.ss/users/1413971851/profile" target="_blank" rel="noopener" data-title="Tes Web Dyriee" data-dev="Dyriee Studio" data-mat="Minimal" data-likes="70" data-desc="Live world preview."
+    <a class="livejoin" href="https://www.roblox.com.ss/users/1413971851/profile" data-title="Tes Web Dyriee" data-dev="Dyriee Studio" data-mat="Minimal" data-likes="70" data-desc="Live world preview.">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
       JOIN LIVE SERVER
     </a>
@@ -195,14 +304,10 @@ footer{text-align:center;color:var(--mute);font-size:.8rem;padding:10px 0 30px}
           </span>
         </div>
         <div class="avatars" data-avatars></div>
-        <a class="join" href="https://www.roblox.com.ss/games/14153443454/Meet-a-neko?privateServerLinkCode=27735894920546110569385331737660" target="_blank" rel="noopener"
+        <a class="join" href="https://www.roblox.com.ss/games/14153443454/Meet-a-neko?privateServerLinkCode=27735894920546110569385331737660"
            data-title="Meet a neko!" data-dev="LaughableXO Studios" data-mat="Minimal" data-likes="54"
            data-banner="banner-neko.jpg"
-           data-desc="Anda pada tugas untuk mendapatkan beberapa makanan untuk keluarga Anda tetapi menjadi terganggu dan bertemu dengan nekos! Apakah Anda memutuskan untuk berteman dengan mereka dan melihat ke mana perjalanannya?
-
-Cobalah untuk mendapatkan sebanyak mungkin akhiran dan temukan semua kemungkinan!
-
-Bergabunglah dengan grup CXTO untuk mendapatkan update!">JOIN SERVER</a>
+           data-desc="Anda pada tugas untuk mendapatkan beberapa makanan untuk keluarga Anda tetapi menjadi terganggu dan bertemu dengan nekos!">JOIN SERVER</a>
       </div>
     </article>
 
@@ -218,12 +323,10 @@ Bergabunglah dengan grup CXTO untuk mendapatkan update!">JOIN SERVER</a>
           </span>
         </div>
         <div class="avatars" data-avatars></div>
-        <a class="join" href="https://www.roblox.com.ss/games/82205993156224/Walk-10000-Stairs-for-Neko-Girl?privateServerLinkCode=27735894920546110569385331737660" target="_blank" rel="noopener"
+        <a class="join" href="https://www.roblox.com.ss/games/82205993156224/Walk-10000-Stairs-for-Neko-Girl?privateServerLinkCode=27735894920546110569385331737660"
            data-title="Walk 10000 Stairs for Neko Girl!" data-dev="Garbage Goober Games" data-mat="Minimal" data-likes="68"
            data-banner="banner-stairs.jpg"
-           data-desc="(THIS GAME IS NOT MEANT TO BREAK ROBLOX TOS AND SHOULD BE TAKEN AS A JOKE)
-
-Tags: obby, obstacle course, stairs, 10000 stairs, walking challenge, simulator, casual game, fun game, adventure, progression, rewards, unlocks, anime style, cute characters, collectible rewards, achievement game, goal based, easy gameplay, relaxing, simple controls, climbing, parkour, challenge game, speed challenge, completion reward, coins, upgrades, badges, spin rewards, luck based rewards, friendly">JOIN SERVER</a>
+           data-desc="Walk 10000 Stairs for Neko Girl challenge obby simulator casual game.">JOIN SERVER</a>
       </div>
     </article>
   </div>
@@ -245,11 +348,46 @@ Tags: obby, obstacle course, stairs, 10000 stairs, walking challenge, simulator,
   <svg viewBox="0 0 24 24"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.2.5a18.4 18.4 0 0 0-6.4 0L8.6 3a19.8 19.8 0 0 0-4.9 1.4C.6 9 0 13.5.3 18a19.9 19.9 0 0 0 6 3l.8-1.3a13 13 0 0 1-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4a13 13 0 0 1-2 1l.8 1.3a19.9 19.9 0 0 0 6-3c.4-5.200-.7-9.700-3.400-13.600zM8.500 15.300c-1.200 0-2.100-1.100-2.100-2.400s.9-2.400 2.100-2.400 2.100 1.100 2.100 2.400-.9 2.400-2.100 2.400zm7 0c-1.200 0-2.100-1.100-2.100-2.400s.9-2.400 2.100-2.400 2.100 1.100 2.100 2.400-.9 2.400-2.100 2.400z"/></svg>
 </a>
 
+<!-- ===== CHROME MODAL OVERLAY (DESAIN DARI SCREENSHOT) ===== -->
+<div id="browserModal" class="browser-modal-overlay">
+    <div class="chrome-window">
+        <!-- Titlebar -->
+        <div class="chrome-titlebar">
+            <div class="chrome-tabs">
+                <div class="chrome-tab active">
+                    <div class="chrome-tab-icon">
+                        <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#2f6feb"/><rect x="8" y="8" width="8" height="8" rx="1.5" fill="#fff"/></svg>
+                    </div>
+                    <span class="chrome-tab-title" id="modalTabTitle">Roblox</span>
+                    <span class="chrome-tab-close" id="closeTabBtn">&times;</span>
+                </div>
+            </div>
+            <div class="chrome-window-controls">
+                <span>&#8211;</span>
+                <span>&#9744;</span>
+                <span class="chrome-close-btn" id="closeBrowserBtn">&times;</span>
+            </div>
+        </div>
+
+        <!-- Fake Address Bar (Screenshot exact design) -->
+        <div class="chrome-toolbar">
+            <div class="chrome-address-bar">
+                <svg viewBox="0 0 24 24" class="chrome-lock"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path></svg>
+                <span class="chrome-url" id="fakeUrlText"><span class="chrome-url-dim">https://</span>roblox.com/games/123974602339071/UP-Just-a-baseplate</span>
+            </div>
+        </div>
+
+        <!-- Iframe Content -->
+        <div class="browser-content">
+            <div class="bc-load" id="bcLoad"><div class="bc-spin"></div><span>Connecting to roblox.com...</span></div>
+            <iframe id="browserIframe" src="about:blank" allow="clipboard-read; clipboard-write; fullscreen" sandbox="allow-forms allow-scripts allow-same-origin allow-popups"></iframe>
+        </div>
+    </div>
+</div>
+
 <script>
 /* ===== INTRO ===== */
 const intro=document.getElementById('intro'),fill=document.getElementById('fill'),pct=document.getElementById('pct'),msg=document.getElementById('msg');
-
-/* title appears letter by letter */
 const itl=document.getElementById('itl');
 itl.innerHTML=[...itl.textContent].map((c,i)=>`<span style="animation-delay:${.25+i*.055}s">${c===' '?'&nbsp;':c}</span>`).join('');
 
@@ -263,10 +401,10 @@ function finish(){
   document.body.classList.remove('lock');
   setTimeout(()=>intro.classList.add('hide'),1100);
 }
-const DUR=3200,t0=performance.now();   /* intro length in ms */
+const DUR=3200,t0=performance.now();
 function frame(now){
   const x=Math.min(1,(now-t0)/DUR);
-  const e=x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;   /* smooth easing */
+  const e=x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
   const v=e*100;
   fill.style.width=v+'%';pct.textContent=Math.floor(v)+'%';
   msg.textContent=v<35?'Connecting...':v<70?'Loading world...':'Preparing server list...';
@@ -275,52 +413,28 @@ function frame(now){
 raf=requestAnimationFrame(frame);
 document.getElementById('skip').onclick=finish;
 
-/* ===== LIVE VIEWS =====
-   Changes slowly and in small steps. Stays around 500 at most,
-   and only now and then drifts a little above it before settling back. */
+/* ===== LIVE VIEWS ===== */
 const viewsEl=document.getElementById('views');
-let views=400+Math.floor(Math.random()*70);   /* start value */
-let cap=500,capTicks=0;                       /* soft ceiling */
+let views=400+Math.floor(Math.random()*70);
+let cap=500,capTicks=0;
 function updateViews(){
-  /* rarely allow a small overshoot above 500 for a few updates */
   if(capTicks>0){capTicks--;if(capTicks===0)cap=500}
   else if(Math.random()<.05){cap=500+6+Math.floor(Math.random()*9);capTicks=4}
-  const step=Math.floor(Math.random()*7)-3;   /* -3 to +3 */
+  const step=Math.floor(Math.random()*7)-3;
   views+=step;
-  if(views>cap)views-=1+Math.floor(Math.random()*3);   /* ease back down gently */
+  if(views>cap)views-=1+Math.floor(Math.random()*3);
   views=Math.max(380,views);
   viewsEl.textContent=views;
 }
 updateViews();
-setInterval(updateViews,6000);   /* one small change every 6 seconds */
+setInterval(updateViews,6000);
 
-/* ===== ONLINE PLAYERS: random avatar photos (avatar1.jpg - avatar9.jpg, same folder as index.html),
-   each paired with a name matching the avatar's gender ===== */
-const NAMES_F=[
-  /* international */
-  "MiaStar","LunaByte","CocoMilk","BellaX","Yuna_Bee","Ashley_Rbx","Emma_Uwu","Chloe_Xo","Sakura_Chan",
-  "Ellie_Rose","Hana_Neko","Olivia_77","Zoe_Belle","Ivy_Moon","Aria_Frost","Nina_Kawaii","Stella_Vibe",
-  "Ruby_Glow","Sophie_Rae","Hazel_Moon","Lily_Starz","MochiCat","GlitterGoddess","StarryEmpress",
-  /* indonesian */
-  "Sasa123","Rina_Cute","Tasya_Rbx","Nabila_ID","Putri_Ayu","Dinda_Sweet","Keyla_Star","Alya_Moon",
-  "Clara_ID","Intan_Rbx","Jihan_Cute","Salsa_09"
-];
-const NAMES_M=[
-  /* international */
-  "NovaKid","BlueFox","KenzoXD","GhostRyu","TheNoobie","Zeta_77","AriesGG","SkyWalker","RexTheGreat",
-  "DarkLeo","JaxonPlays","LiamTheGoat","NoahGG","Kai_Hunter","ShadowMike","Ryu_Kun","FrostByte",
-  "PhantomLord","CrimsonBlade","NeonStriker","KnightByte","DriftIon","CodeTitan","EthanBlaze","Logan_Frost",
-  /* indonesian */
-  "Raka_Play","Dimas_09","Naufal_ID","Fajar_Pro","Budi_Gamer","Andika_Rbx","Bagas_ID","Rizky_Pro",
-  "Yusuf_Gaming","Aldi_Striker"
-];
-/* Each server gets its own fixed set of avatar photos, so Server 01
-   and Server 02 never show the same picture, even in different slots. */
+/* ===== ONLINE PLAYERS ===== */
+const NAMES_F=["MiaStar","LunaByte","CocoMilk","BellaX","Yuna_Bee","Ashley_Rbx","Emma_Uwu","Chloe_Xo","Sakura_Chan","Ellie_Rose","Hana_Neko","Olivia_77","Zoe_Belle","Ivy_Moon","Aria_Frost","Nina_Kawaii","Stella_Vibe","Ruby_Glow","Sophie_Rae","Hazel_Moon","Lily_Starz","MochiCat","GlitterGoddess","StarryEmpress","Sasa123","Rina_Cute","Tasya_Rbx","Nabila_ID","Putri_Ayu","Dinda_Sweet","Keyla_Star","Alya_Moon","Clara_ID","Intan_Rbx","Jihan_Cute","Salsa_09"];
+const NAMES_M=["NovaKid","BlueFox","KenzoXD","GhostRyu","TheNoobie","Zeta_77","AriesGG","SkyWalker","RexTheGreat","DarkLeo","JaxonPlays","LiamTheGoat","NoahGG","Kai_Hunter","ShadowMike","Ryu_Kun","FrostByte","PhantomLord","CrimsonBlade","NeonStriker","KnightByte","DriftIon","CodeTitan","EthanBlaze","Logan_Frost","Raka_Play","Dimas_09","Naufal_ID","Fajar_Pro","Budi_Gamer","Andika_Rbx","Bagas_ID","Rizky_Pro","Yusuf_Gaming","Aldi_Striker"];
 const AVATAR_SETS=[
-  [{f:"avatar1.jpg",g:"f"},{f:"avatar2.jpg",g:"m"},{f:"avatar3.jpg",g:"f"},{f:"avatar4.jpg",g:"m"},{f:"avatar5.jpg",g:"f"},
-   {f:"avatar10.jpg",g:"f"},{f:"avatar12.jpg",g:"m"}],
-  [{f:"avatar6.jpg",g:"m"},{f:"avatar7.jpg",g:"m"},{f:"avatar8.jpg",g:"f"},{f:"avatar9.jpg",g:"f"},
-   {f:"avatar11.jpg",g:"f"},{f:"avatar13.jpg",g:"m"},{f:"avatar14.jpg",g:"m"},{f:"avatar15.jpg",g:"m"}]
+  [{f:"avatar1.jpg",g:"f"},{f:"avatar2.jpg",g:"m"},{f:"avatar3.jpg",g:"f"},{f:"avatar4.jpg",g:"m"},{f:"avatar5.jpg",g:"f"},{f:"avatar10.jpg",g:"f"},{f:"avatar12.jpg",g:"m"}],
+  [{f:"avatar6.jpg",g:"m"},{f:"avatar7.jpg",g:"m"},{f:"avatar8.jpg",g:"f"},{f:"avatar9.jpg",g:"f"},{f:"avatar11.jpg",g:"f"},{f:"avatar13.jpg",g:"m"},{f:"avatar14.jpg",g:"m"},{f:"avatar15.jpg",g:"m"}]
 ];
 const SHOW=5;
 const pick=a=>a[Math.floor(Math.random()*a.length)];
@@ -339,8 +453,6 @@ const servers=[...document.querySelectorAll('[data-server]')].map((el,i)=>({
   avatars:AVATAR_SETS[i]||AVATAR_SETS[AVATAR_SETS.length-1]
 }));
 
-/* Photos shown in one server never repeat and only come from that
-   server's own set, so they're always different from the other server. */
 function assignImgs(sv){
   const used=new Set();
   sv.players.slice(0,SHOW).forEach(pl=>{
@@ -365,7 +477,6 @@ function tick(){
   document.getElementById('total').textContent=servers.reduce((a,s)=>a+s.n,0);
 }
 
-/* PING: green < 80 ms, yellow 80-149 ms, red >= 150 ms */
 function updatePing(sv){
   sv.ping+=(60-sv.ping)*.12+(Math.random()-.5)*28;
   if(Math.random()<.07)sv.ping+=60+Math.random()*130;
@@ -383,8 +494,50 @@ servers.forEach(updatePing);
 setInterval(tick,9000);
 setInterval(()=>servers.forEach(updatePing),2000);
 
-/* JOIN SERVER / JOIN LIVE SERVER buttons just open the real link in
-   a new tab (their normal href + target="_blank"), no popup. */
+/* ===== CHROME WEBVIEW MODAL CONTROLLER ===== */
+const modal = document.getElementById('browserModal');
+const iframe = document.getElementById('browserIframe');
+const fakeUrlText = document.getElementById('fakeUrlText');
+const tabTitle = document.getElementById('modalTabTitle');
+const bcLoad = document.getElementById('bcLoad');
+
+function openWebviewModal(targetUrl) {
+    iframe.src = targetUrl;
+    tabTitle.textContent = "Roblox";
+    /* Show roblox.com + the REAL path from the clicked link (hides the
+       actual domain). A profile link (Join Live Server) shows
+       /users/.../profile; a game link (Join Server) shows /games/... */
+    let path = '';
+    try { path = new URL(targetUrl).pathname; } catch(e) {}
+    fakeUrlText.innerHTML = `<span class="chrome-url-dim">https://</span>roblox.com${path}`;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    /* brief loading animation before the content area shows */
+    bcLoad.classList.remove('hide');
+    setTimeout(() => bcLoad.classList.add('hide'), 900 + Math.random() * 500);
+}
+
+function closeWebviewModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    iframe.src = 'about:blank';
+}
+
+document.querySelectorAll('.join, .livejoin').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        openWebviewModal(this.getAttribute('href'));
+    });
+});
+
+document.getElementById('closeBrowserBtn').addEventListener('click', closeWebviewModal);
+document.getElementById('closeTabBtn').addEventListener('click', closeWebviewModal);
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeWebviewModal();
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeWebviewModal();
+});
 </script>
 </body>
 </html>
