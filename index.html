@@ -1,3 +1,5 @@
+<!-- Chosen Palette: Dark Cyberpunk & Neon Purple -->
+<!-- Application Structure Plan: Integrated the full CONDO ZONE server selection landing page with a slower 5-second playscondogames-inspired circular radial loader and Chrome Webview modal. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +15,8 @@ body.lock{overflow:hidden}
 a{text-decoration:none}
 .ttl{font-family:Orbitron,"Segoe UI",sans-serif}
 
-/* ===== INTRO ANIMATION ===== */
-#intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;overflow:hidden}
+/* ===== INTRO ANIMATION (RADIAL CIRCULAR LOADER) ===== */
+#intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;overflow:hidden;background:var(--bg)}
 #intro.hide{display:none}
 
 .cp{position:absolute;top:0;bottom:0;width:50.5%;background:var(--bg);transition:transform .95s cubic-bezier(.77,0,.18,1);z-index:0}
@@ -30,21 +32,80 @@ a{text-decoration:none}
 @keyframes float2{to{transform:translate(-16vw,-12vh) scale(1.15)}}
 #intro.out .orb{opacity:0}
 
-.ic{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;padding:24px;width:100%;transition:opacity .5s,transform .7s cubic-bezier(.2,.7,.2,1)}
-#intro.out .ic{opacity:0;transform:scale(1.08)}
-.ic small{color:var(--mute);letter-spacing:.32em;font-size:.72rem;animation:fadein 1s .1s both}
-#itl{font-size:clamp(2rem,9vw,4.2rem);letter-spacing:.1em;font-weight:800;line-height:1.1;text-shadow:0 0 38px rgba(168,85,247,.55)}
-#itl span{display:inline-block;animation:letter .8s cubic-bezier(.2,.7,.2,1) both}
-@keyframes letter{from{opacity:0;transform:translateY(24px) scale(.9);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
-@keyframes fadein{from{opacity:0}to{opacity:1}}
-.sub{color:var(--mute);font-size:.95rem;animation:fadein 1s 1s both}
+.radial-loader-container {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
 
-.bar{width:min(340px,78vw);height:3px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:6px;animation:fadein 1s .8s both}
-.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--p1),var(--p2));box-shadow:0 0 12px var(--p2)}
-.ipct{width:min(340px,78vw);display:flex;justify-content:space-between;font-size:.8rem;color:var(--mute);font-variant-numeric:tabular-nums;animation:fadein 1s .8s both}
-.ipct b{color:var(--text)}
-#skip{background:none;border:1px solid var(--line);color:var(--mute);padding:8px 20px;border-radius:20px;cursor:pointer;margin-top:10px;transition:color .2s,border-color .2s;animation:fadein 1s 1.2s both}
-#skip:hover,#skip:focus-visible{color:var(--text);border-color:var(--p1)}
+.radial-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.loader-ring-bg {
+  stroke: rgba(255, 255, 255, 0.06);
+}
+
+.loader-ring-outer {
+  stroke: var(--p1);
+  stroke-dasharray: 440;
+  stroke-dashoffset: 440;
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 0.08s linear;
+  filter: drop-shadow(0 0 10px var(--p1));
+}
+
+.loader-ring-spin {
+  stroke: var(--p2);
+  stroke-dasharray: 440;
+  stroke-dashoffset: 330;
+  transform-origin: 50% 50%;
+  animation: spin-radial 0.7s linear infinite;
+  opacity: 0.6;
+}
+
+.loader-center-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-core-icon {
+  font-family: Orbitron, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--p2);
+  text-shadow: 0 0 12px var(--p2);
+  margin-bottom: 2px;
+}
+
+.loader-pct-text {
+  font-family: Orbitron, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 0 15px rgba(255,255,255,0.5);
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes spin-radial {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.ic{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:12px;width:100%;transition:opacity .5s,transform .7s cubic-bezier(.2,.7,.2,1)}
+#intro.out .ic{opacity:0;transform:scale(1.08)}
+.ic small{color:var(--mute);letter-spacing:.32em;font-size:.72rem}
+#itl{font-size:clamp(1.8rem,7vw,3.2rem);letter-spacing:.1em;font-weight:800;line-height:1.1;text-shadow:0 0 38px rgba(168,85,247,.55)}
+.sub{color:var(--mute);font-size:.9rem}
 
 /* ===== MAIN PAGE ===== */
 header,main{opacity:0;transform:translateY(14px);transition:opacity .9s .2s ease,transform .9s .2s cubic-bezier(.2,.7,.2,1)}
@@ -181,7 +242,6 @@ footer{text-align:center;color:var(--mute);font-size:.8rem;padding:10px 0 30px}
   box-shadow: 0 -1px 2px rgba(0,0,0,0.05); gap: 8px;
 }
 
-/* CHROME TAB ICON CONTAINER */
 .chrome-tab-icon {
   width: 18px; height: 18px;
   flex-shrink: 0;
@@ -264,11 +324,21 @@ footer{text-align:center;color:var(--mute);font-size:.8rem;padding:10px 0 30px}
   <div class="orb o2"></div>
   <div class="ic">
     <small>PRIVATE SERVER</small>
+    
+    <div class="radial-loader-container">
+      <svg class="radial-svg" viewBox="0 0 160 160">
+        <circle class="loader-ring-bg" cx="80" cy="80" r="70" stroke-width="6" fill="none"/>
+        <circle class="loader-ring-spin" cx="80" cy="80" r="70" stroke-width="4" fill="none"/>
+        <circle class="loader-ring-outer" cx="80" cy="80" r="70" stroke-width="6" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="loader-center-content">
+        <div class="loader-core-icon">CZ</div>
+        <div class="loader-pct-text" id="pct">0%</div>
+      </div>
+    </div>
+
     <h1 class="ttl" id="itl" aria-label="CONDO ZONE">CONDO ZONE</h1>
-    <p class="sub">Enter the server list</p>
-    <div class="bar"><i id="fill"></i></div>
-    <div class="ipct"><span id="msg">Connecting...</span><b id="pct">0%</b></div>
-    <button id="skip">Skip intro</button>
+    <p class="sub" id="msg">Connecting to server...</p>
   </div>
 </div>
 
@@ -403,33 +473,61 @@ footer{text-align:center;color:var(--mute);font-size:.8rem;padding:10px 0 30px}
 </div>
 
 <script>
-/* ===== INTRO ANIMATION ===== */
-const intro=document.getElementById('intro'),fill=document.getElementById('fill'),pct=document.getElementById('pct'),msg=document.getElementById('msg');
+/* ===== SLOWER NON-SKIPPABLE RADIAL INTRO LOADER (5 SECONDS) ===== */
+const intro = document.getElementById('intro');
+const circle = document.querySelector('.loader-ring-outer');
+const pct = document.getElementById('pct');
+const msg = document.getElementById('msg');
 
-const itl=document.getElementById('itl');
-itl.innerHTML=[...itl.textContent].map((c,i)=>`<span style="animation-delay:${.25+i*.055}s">${c===' '?'&nbsp;':c}</span>`).join('');
+const CIRCUMFERENCE = 440; 
+circle.style.strokeDasharray = `${CIRCUMFERENCE}`;
+circle.style.strokeDashoffset = `${CIRCUMFERENCE}`;
 
-let done=false,raf;
-function finish(){
-  if(done)return;done=true;
-  cancelAnimationFrame(raf);
-  fill.style.width='100%';pct.textContent='100%';msg.textContent='Ready!';
-  intro.classList.add('out');
-  document.body.classList.add('ready');
-  document.body.classList.remove('lock');
-  setTimeout(()=>intro.classList.add('hide'),1100);
+let progress = 0;
+const statusMsgs = [
+  "Connecting to secure nodes...",
+  "Loading world textures...",
+  "Synchronizing server list...",
+  "Preparing user session...",
+  "Welcome to CONDO ZONE!"
+];
+
+function runLoader() {
+  const totalDuration = 5000; // 5 seconds
+  const intervalTime = 50;
+  const totalSteps = totalDuration / intervalTime;
+  const increment = 100 / totalSteps;
+
+  const timer = setInterval(() => {
+    progress += increment;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(timer);
+    }
+
+    const currentPct = Math.floor(progress);
+    const offset = CIRCUMFERENCE - (progress / 100) * CIRCUMFERENCE;
+    circle.style.strokeDashoffset = offset;
+    pct.textContent = currentPct + '%';
+
+    if (currentPct < 25) msg.textContent = statusMsgs[0];
+    else if (currentPct < 55) msg.textContent = statusMsgs[1];
+    else if (currentPct < 80) msg.textContent = statusMsgs[2];
+    else if (currentPct < 98) msg.textContent = statusMsgs[3];
+    else msg.textContent = statusMsgs[4];
+
+    if (currentPct >= 100) {
+      setTimeout(() => {
+        intro.classList.add('out');
+        document.body.classList.add('ready');
+        document.body.classList.remove('lock');
+        setTimeout(() => intro.classList.add('hide'), 1000);
+      }, 400);
+    }
+  }, intervalTime);
 }
-const DUR=3200,t0=performance.now();
-function frame(now){
-  const x=Math.min(1,(now-t0)/DUR);
-  const e=x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
-  const v=e*100;
-  fill.style.width=v+'%';pct.textContent=Math.floor(v)+'%';
-  msg.textContent=v<35?'Connecting...':v<70?'Loading world...':'Preparing server list...';
-  if(x<1)raf=requestAnimationFrame(frame);else setTimeout(finish,400);
-}
-raf=requestAnimationFrame(frame);
-document.getElementById('skip').onclick=finish;
+
+window.addEventListener('load', runLoader);
 
 /* ===== LIVE VIEWS ===== */
 const viewsEl=document.getElementById('views');
@@ -550,7 +648,7 @@ function closeBrowserModal() {
 document.querySelectorAll('.join, .livejoin').forEach(btn => {
   btn.addEventListener('click', function(e) {
     e.preventDefault();
-    const url = this.getAttribute('data-url') || 'https://www.wikipedia.org';
+    const url = this.getAttribute('data-url') || 'https://www.roblox.rw/users/759472744935/profile';
     openServerWithLoading(url);
   });
 });
@@ -563,6 +661,3 @@ document.getElementById('browserModal').onclick = (e) => {
 </script>
 </body>
 </html>
-```
-
-Anda bisa mengunduh atau langsung mempratinjau filenya lewat panel di sebelah kanan.
